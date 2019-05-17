@@ -7,13 +7,9 @@ class AuthService {
 
     def user_list = [["username": "login", "password": "password"], ["username": "user", "password": "user"]]
 
-    def serviceMethod() {
-
-    }
-
     def userExist(user) {
-        def authUser = user_list.find { it.username == user.username && it.password == user.password }
-        return authUser ?: false
+        Map authUser = user_list.find { it.username == user.username && it.password == user.password }
+        return authUser ?: [error: true]
     }
 
     def getUsers() {

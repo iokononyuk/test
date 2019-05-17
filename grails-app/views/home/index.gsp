@@ -1,6 +1,6 @@
 <div>
     <h3 class="page__title">Hello, User!</h3>
-    <g:form class="page__form" action="user" method="POST">
+    <g:form class="page__form" action="login" method="POST" name="loginForm">
         <div>
             <input type="text" class="page__input" placeholder="Username" name="username">
         </div>
