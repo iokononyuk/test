@@ -1,5 +1,5 @@
 (function () {
-
+    var path = window.location.pathname.split('/')[1];
 
 
     $(document).on('submit', 'form', function (event) {
@@ -10,16 +10,16 @@
         if (!user.username || !user.password) {
             showError('empty');
             return false;
-        } else { 
-            $.post( $(this).attr('action'), {data: jsonToXML({user: user})}, function(res) {
+        } else {
+            $.post($(this).attr('action'), { data: jsonToXML({ user: user }) }, function (res) {
                 const res_json = parseXML(res);
-                if ( res_json.error ) {
-                    window.location = '/test-app/home?wrong=true';
+                if (res_json.error) {
+                    window.location = '/' + path + '/home?wrong=true';
                     return false;
                 } else {
-                    window.location = '/test-app/home/user?username=' + res_json.username
+                    window.location = '/' + path + '/home/user?username=' + res_json.username
                 }
-            } )
+            })
         }
     });
 
@@ -73,9 +73,9 @@
     }
 
     function parseXML(xml) {
-        var data = {};  
-        $(xml).find('entry').each(function(i, el) { 
-            data[ $(el).attr('key') ] = $(el).text();
+        var data = {};
+        $(xml).find('entry').each(function (i, el) {
+            data[$(el).attr('key')] = $(el).text();
         });
         return data;
     }
